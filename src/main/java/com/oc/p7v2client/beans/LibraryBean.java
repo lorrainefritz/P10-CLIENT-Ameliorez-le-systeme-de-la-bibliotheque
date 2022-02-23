@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,30 +18,11 @@ import javax.validation.constraints.Size;
 public class LibraryBean {
 
     private Integer id;
-
-
-    @Size(max=65, message="65 charactères maximum")
-    @NotBlank(message="Ce champ ne doit pas être vide")
     private String name;
-
-
-    @Size(max=65, message="65 charactères maximum")
-    @NotBlank(message="Ce champ ne doit pas être vide")
     private String address;
-
-
-    @Size(max=65, message="65 charactères maximum")
-    @NotBlank(message="Ce champ ne doit pas être vide")
     private String email;
-
-
-    @Size(max=65, message="65 charactères maximum")
-    @NotBlank(message="Ce champ ne doit pas être vide")
     private String phone;
-
-
-    @Size(max=65, message="65 charactères maximum")
-    @NotBlank(message="Ce champ ne doit pas être vide")
     private String openingTime;
 
+  /*  private List<BookBean>books;*/
 }

@@ -50,13 +50,13 @@
         <div class="col-sm-4" id="descriptionBooksList">
             <div class="titleAndTagged">
                 <h3 th:text="${book.title}"></h3>
-                <div th:each="currentStock: ${book.totalOfCopies}">
-                    <div class="float-right" th:if="${book.totalOfCopies>0}">
+                <div th:each="currentStock: ${book.numberOfCopiesAvailable}">
+                    <div class="float-right" th:if="${book.numberOfCopiesAvailable>0}">
                         <img class="img-fluid" alt="logoLivreDisponible"
                              src="/logos/logoLivreDisponible.png">
                     </div>
                     <div class="float-right"
-                         th:if="${book.totalOfCopies==0}">
+                         th:if="${book.numberOfCopiesAvailable==0}">
                         <img class="img-fluid" alt="logoLivreDisponible"
                              src="/logos/logoLivreIndisponible.png">
                     </div>
@@ -95,7 +95,7 @@
                 Se livre se trouve à la bibliothèque de : <a th:text="${book.libraryName}"></a>
             </div>
             <div>
-                Nombre de copies disponibles : <a th:text="${book.totalOfCopies}"></a>
+                Nombre de copies disponibles : <a th:text="${book.numberOfCopiesAvailable}"></a>
             </div>
 
             <!--  <div>

@@ -34,7 +34,7 @@ public class BookSlimBean {
     @Min(value=0, message="doit ête compris entre 1 et 10")
     @Max(value=10, message="doit ête compris entre 1 et 10")
     @NotNull(message="Ce champ ne doit pas être vide")
-    private int totalOfCopies;
+    private int numberOfCopiesAvailable;
     @NotBlank(message="Ce champ ne doit pas être vide")
     private String libraryName;
 
