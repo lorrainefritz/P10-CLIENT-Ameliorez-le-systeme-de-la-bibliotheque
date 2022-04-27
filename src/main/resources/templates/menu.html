@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title>Les Bibliothèques de Katzenheim</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -47,12 +48,26 @@
 
 				</div>
 			</li>
+			<!--sec:authorize="isAnonymous()"-->
+			<li class="nav-item" ><a
+					class="nav-link" href="/login"> Login </a></li>
+
+			<!--sec:authorize="isAuthenticated()"-->
+			<li class="dropdown" >
+				<button type="button" class="btn btn-primary dropdown-toggle"
+						data-toggle="dropdown">Mon Compte</button>
+				<div class="dropdown-menu">
+					<a class="nav-link" href="/myAccount">Mon Compte</a>
+					<!--<a class="dropdown-item" th:href="@{/logout}">Déconnection</a>-->
+				</div>
+			</li>
+
+
 		</ul>
 	</nav>
 
 
-			<!--<li class="nav-item" sec:authorize="isAnonymous()"><a
-				class="nav-link" href="/identification"> Mon Compte </a></li>
+			<!--
 
 
 
@@ -65,14 +80,7 @@
 				</div>
 			</li>
 
-			<li class="dropdown" sec:authorize="isAuthenticated()">
-				<button type="button" class="btn btn-primary dropdown-toggle"
-					data-toggle="dropdown">Mon Compte</button>
-				<div class="dropdown-menu">
-					<a class="nav-link" href="/monCompte">Mon Compte</a> <a
-						class="dropdown-item" th:href="@{/logout}">Déconnection</a>
-				</div>
-			</li>
+
 		</ul>
 		<a class="navbar-brand" href="#" sec:authorize="isAnonymous()"> <img
 			class="img-fluid" alt="Mon Compte"

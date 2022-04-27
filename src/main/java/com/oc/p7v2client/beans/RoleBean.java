@@ -6,23 +6,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Log4j2
-public class LibraryBean {
+public class RoleBean {
 
     private Integer id;
+
+    @Size(max=65, message="65 charactères maximum")
+    @NotBlank(message="Ce champ ne doit pas être vide")
     private String name;
-    private String address;
-    private String email;
-    private String phone;
-    private String openingTime;
 
 
 }
