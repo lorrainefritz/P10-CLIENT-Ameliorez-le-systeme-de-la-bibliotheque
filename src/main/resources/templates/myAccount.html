@@ -1,91 +1,55 @@
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<meta charset="UTF-8">
-<title>Les Bibliothèques de Katzenheim</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Les Bibliothèques de Katzenheim</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="bloc_page">
-		<header>
-			<div class="header_top_part">
-				<div th:insert="menu.html"></div>
-			</div>
-			<div class="header_bottom_part">
-				<h1>MON COMPTE</h1>
-			</div>
-		</header>
+<div class="bloc_page">
+    <header>
+        <div class="header_top_part">
+            <div th:insert="menu.html"></div>
+        </div>
+        <div class="header_bottom_part">
+            <h1>MON COMPTE</h1>
+        </div>
+    </header>
 
 
-		<div class="d-flex flex-column align-items-center"
-			id="blocPageMonCompte">
+    <div class="d-flex flex-column align-items-center"
+         id="blocPageMonCompte">
 
-			<div class="p-2 border" id="MonCompteInfos">
-				<h2>Mes informations générales</h2>
-				<!--<div>
-					PRENOM : <a th:text="${user.firstName}"></a>
-				</div>
-				<div>
-					NOM : <a th:text="${user.lastName}"></a>
-				</div>
-				<div>
-					ADRESSE : <a th:text="${user.address}"></a>
-				</div>
-				<div>
-					TELEPHONE : <a th:text="${user.phone}"></a>
-				</div>
-				<div>
-					EMAIL : <a th:text="${user.email}"></a>
-				</div>-->
-				<div>
-					USERNAME : <a th:text="${user.username}"></a>
-				</div>
+        <div class="p-2 border" id="MonCompteInfos">
+            <h2>Mes informations générales</h2>
+            <div>
+                PRENOM : <a th:text="${user.firstName}"></a>
+            </div>
+            <div>
+                NOM : <a th:text="${user.lastName}"></a>
+            </div>
+            <div>
+                ADRESSE : <a th:text="${user.address}"></a>
+            </div>
+            <div>
+                TELEPHONE : <a th:text="${user.phone}"></a>
+            </div>
+            <div>
+                EMAIL : <a th:text="${user.email}"></a>
+            </div>
 
-			</div>
+            <div>
+                USERNAME : <a th:text="${user.username}"></a>
+            </div>
 
+        </div>
 
- 			<div class="p-2 border" id="MonCompteBorrows">
-				<!--<h2>Mes Emprunts</h2>
+    </div>
+</div>
 
-				
-				<div id="OneBorrowMonCompte" th:each="borrow,custStat:${borrows}">
-
-					<div class="float-right" th:if="${borrow.isIsOutdated == true}">
-						<a> <img class="img-fluid" alt="borrow is Outdate"
-							src="/imagesAndLogos/logos/borrowIsOutdated.png">
-						</a>
-					</div>
-					<div class="float-right" th:if="${borrow.alreadyExtended == true}">
-						<a> <img class="img-fluid" alt="borrow is Already extended"
-							src="/imagesAndLogos/logos/borrowAlreadyExtended.png">
-						</a>
-					</div>
-					
-	
-					<h3 th:each="currentBook: ${borrow.book}">
-						<a th:text="${currentBook.title}"></a>
-					</h3>
-					<div>							
-						Date d'emprunt : <a th:text="${#dates.format(borrow.startDate, 'dd-MMM-yyyy')}"></a>
-					</div>
-					<div>
-						Date de retour : <a th:text="${#dates.format(borrow.returnDate, 'dd-MMM-yyyy')}"></a>
-					</div>
-					
-					
-					<div  th:if="${borrow.alreadyExtended == false}">
-						<a class="btn btn-warning" th:href="@{prolongerUnLivre(id=${borrow.id})}">Prolonger le livre</a>			
-					</div>
-				-->
-
-				</div> 
-
-			</div>
-		</div>
-
-		<footer>
-			<div th:insert="footer.html"></div>
-		</footer>
-	</div>
+<footer>
+    <div th:insert="footer.html"></div>
+</footer>
+</div>
 </body>
 </html>

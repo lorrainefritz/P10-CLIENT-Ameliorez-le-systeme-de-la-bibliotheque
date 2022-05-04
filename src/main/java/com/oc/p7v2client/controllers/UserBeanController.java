@@ -1,6 +1,7 @@
 package com.oc.p7v2client.controllers;
 
 import com.oc.p7v2client.beans.UserBean;
+import com.oc.p7v2client.cookie.CookieUtil;
 import com.oc.p7v2client.proxies.UserProxy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -12,39 +13,53 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Controller
 @Log4j2
 public class UserBeanController {
     private final UserProxy userProxy;
-
-    private final String testToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXVsQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODMvbG9naW4iLCJleHAiOjE2NTEwNzc1MjB9.LorY_6omHKSSf7dfM3HJD6NotJE2ApIsJN5BJrgr6oY";
+    private final CookieUtil cookieUtil;
 
     //penser à rajouter l'identification token...
     @GetMapping(value = "/login")
-    public String authenticationForm(Model model) {
-        log.info("HTTP GET request received at /login with authenticationForm");
-        model.addAttribute("username", new String());
-        model.addAttribute("password", new String());
+    public String authenticationForm(Model model, @CookieValue(name = "jwtToken", required = false) Cookie cookie) {
+        if (cookie != null) {
+            log.info("HTTP POST request received at /login with authenticate where token {} is present", cookie.getName());
+
+            return "redirect:/users/account";
+        } else {
+            log.info("HTTP GET request received at /login with authenticationForm");
+            model.addAttribute("username", new String());
+            model.addAttribute("password", new String());
+        }
         return "authenticationForm";
     }
 
     @PostMapping(value = "/login")
-    public String authenticate(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
+    public String authenticate(@CookieValue(name = "jwtToken", required = false) Cookie cookie, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpServletResponse response) {
         log.info("HTTP POST request received at /login with authenticate");
-        userProxy.authenticate(username, password);
+        String token = userProxy.authenticate(username, password);
+        log.info("HTTP POST request received at /login with authenticate with token {}", token);
+        cookie = cookieUtil.createCookie(token);
+        response.addCookie(cookie);
+        log.info("HTTP POST request received at /login with authenticate with cookie {}, with expiration date {}", cookie.getName(), new Date(System.currentTimeMillis() + 12 * 24 * 60 * 60 * 1000));
         return "redirect:/users/account";
     }
 
     @GetMapping(value = "/users/account")
-    public String getUserAccount(Model model, @CookieValue(name = "jwtToken", defaultValue = testToken) String token) {
+    /*public String getUserAccount(Model model, @CookieValue(name = "jwtToken", defaultValue = testToken) String cookie) {*/
+    public String getUserAccount(Model model, @CookieValue(name = "jwtToken") String cookie) {
         log.info("HTTP GET request received at /users/account");
-        if (token == null) {
-            log.info("HTTP GET request received at /users/account with token is null");
+        if (cookie == null) {
+            log.info("HTTP GET request received at /users/account with cookie is null");
             return "authenticationForm";
         } else {
-            log.info("HTTP GET request received at /users/account with token is " + token);
-            UserBean user = userProxy.getUserFromToken(token);
+            log.info("HTTP GET request received at /users/account with cookie is " + cookie);
+            UserBean user = userProxy.getUserFromToken(cookie);
             model.addAttribute("user", user);
         }
         return "myAccount";

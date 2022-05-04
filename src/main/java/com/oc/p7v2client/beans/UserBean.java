@@ -23,7 +23,6 @@ public class UserBean {
         @NotBlank(message = "Ce champ ne doit pas être vide")
         private String username;
 
-        /*
          @Size(max = 65, message = "65 charactères maximum")
          @NotBlank(message = "Ce champ ne doit pas être vide")
          private String firstName;
@@ -47,14 +46,6 @@ public class UserBean {
          @Size(max = 65, message = "65 charactères maximum")
          @NotBlank(message = "Ce champ ne doit pas être vide")
          private String phone;
-     */
-
-     /*   @Size(max = 65, message = "65 charactères maximum")
-        @NotBlank(message = "Ce champ ne doit pas être vide")
-        private String password;
-*/
-        private RoleBean rolebean;
-
 
 
     }
