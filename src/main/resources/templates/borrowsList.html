@@ -26,27 +26,34 @@
             <div id="OneBorrowMonCompte" th:each="borrow,custStat:${borrows}">
                 <div>
                     <h3 th:text="${borrow.bookTitle}"></h3>
-                    <div class="float-right" th:if="${borrow.isOutdated == true}">
-                        <a> <img class="img-fluid" alt="borrow is Outdate" src="/logos/borrowIsOutdated.png">
-                        </a>
+                    <div>
+                        <div class="float-right" th:if="${borrow.isOutdated == true}">
+                            <a> <img class="img-fluid" alt="borrow is Outdate" src="/logos/borrowIsOutdated.png">
+                            </a>
+                        </div>
+                        <div class="float-right" th:if="${borrow.alreadyExtended == true}">
+                            <a> <img class="img-fluid" alt="borrow is Already extended"
+                                     src="/logos/borrowAlreadyExtended.png">
+                            </a>
+                        </div>
                     </div>
-                    <div class="float-right" th:if="${borrow.alreadyExtended == true}">
-                        <a> <img class="img-fluid" alt="borrow is Already extended" src="/logos/borrowAlreadyExtended.png">
-                        </a>
-                    </div>
-
-
                     <div>
                         Date d'emprunt : <a th:text="${#dates.format(borrow.startDate, 'dd-MMM-yyyy')}"></a>
                     </div>
                     <div>
                         Date de retour : <a th:text="${#dates.format(borrow.returnDate, 'dd-MMM-yyyy')}"></a>
                     </div>
+                    <div th:if="${borrow.alreadyExtended == false}">
+                        <form method="post" th:action="@{borrows/extend}">
+                            <input type="hidden" name="borrowId" id="borrowId" th:value="${borrow.id}">
+                            <button type="submit" name="submit" value="value" class="btn btn-warning">Prolonger le livre</button>
+                        </form>
+                      <!--  <a class="btn btn-warning" th:action="@{user/account/borrows/(id=${borrow.id})}" th:method="post">Prolonger le livre</a>-->
+                        <!--<a class="btn btn-warning" th:action="@{user/account/borrows/(id=${borrow.id})}">Prolonger le livre</a>-->
+                    </div>
+
                 </div>
 
-                <!--<div th:if="${borrow.alreadyExtended == false}">
-                    <a class="btn btn-warning" th:href="@{prolongerUnLivre(id=${borrow.id})}">Prolonger le livre</a>
-                </div>-->
 
             </div>
 
