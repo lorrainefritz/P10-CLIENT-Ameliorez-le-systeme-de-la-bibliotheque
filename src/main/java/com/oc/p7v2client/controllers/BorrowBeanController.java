@@ -30,10 +30,8 @@ public class BorrowBeanController {
             log.info("HTTP GET request received at /users/account/borrows with cookie is null");
             return "authenticationForm";
         } else {
-            log.info("HTTP GET request received at /users/account/borrows with cookie is " + cookie);
-            UserBean user = userProxy.getUserFromToken(cookie);
-            log.info("HTTP GET request received at /users/account/borrows with user {} " , user.getFirstName());
-            List<BorrowBean> borrows = borrowProxy.borrowList(user.getId());
+
+            List<BorrowBean> borrows = borrowProxy.borrowList(cookie);
             model.addAttribute("borrows", borrows);
             model.addAttribute("borrowId", new String());
         }

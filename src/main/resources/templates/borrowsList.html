@@ -27,7 +27,7 @@
                 <div>
                     <h3 th:text="${borrow.bookTitle}"></h3>
                     <div>
-                        <div class="float-right" th:if="${borrow.isOutdated == true}">
+                        <div class="float-right" th:if="${borrow.outdated == true}">
                             <a> <img class="img-fluid" alt="borrow is Outdate" src="/logos/borrowIsOutdated.png">
                             </a>
                         </div>
@@ -42,6 +42,9 @@
                     </div>
                     <div>
                         Date de retour : <a th:text="${#dates.format(borrow.returnDate, 'dd-MMM-yyyy')}"></a>
+                    </div>
+                    <div>
+                        bibliothèque : <a th:text="${borrow.libraryName}"></a>
                     </div>
                     <div th:if="${borrow.alreadyExtended == false}">
                         <form method="post" th:action="@{borrows/extend}">

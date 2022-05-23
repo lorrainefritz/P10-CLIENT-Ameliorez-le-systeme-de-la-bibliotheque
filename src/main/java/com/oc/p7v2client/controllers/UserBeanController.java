@@ -49,6 +49,12 @@ public class UserBeanController {
         log.info("HTTP POST request received at /login with authenticate with cookie {}, with expiration date {}", cookie.getName(), new Date(System.currentTimeMillis() + 12 * 24 * 60 * 60 * 1000));
         return "redirect:/users/account";
     }
+    @GetMapping(value ="/logout")
+    public String logout(HttpServletResponse response){
+        log.info("HTTP GET request received at /logout ");
+        cookieUtil.deleteCookie(response);
+        return "redirect:/login";
+    }
 
     @GetMapping(value = "/users/account")
     /*public String getUserAccount(Model model, @CookieValue(name = "jwtToken", defaultValue = testToken) String cookie) {*/

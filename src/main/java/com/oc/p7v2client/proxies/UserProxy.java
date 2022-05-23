@@ -18,4 +18,5 @@ public interface UserProxy {
 
     @GetMapping(value="/users/account")
     public UserBean getUserFromToken(@CookieValue(value ="jwtToken")String token);
+
 }

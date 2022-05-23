@@ -5,6 +5,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @Log4j2
 @NoArgsConstructor
 @Component
@@ -24,4 +26,11 @@ public class CookieUtil {
         return cookie;
     }
 
+    public void deleteCookie(HttpServletResponse response) {
+            Cookie cookie = new Cookie(COOKIE_NAME, null);
+            cookie.setPath("/");
+            cookie.setHttpOnly(true);
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+    }
 }
