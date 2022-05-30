@@ -1,9 +1,8 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Les Bibliothèques de Katzenheim</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <div class="bloc_page">
@@ -12,17 +11,13 @@
             <div th:insert="menu.html"></div>
         </div>
         <div class="header_bottom_part">
-            <h1>MON COMPTE</h1>
+            <h1>MES EMPRUNTS</h1>
         </div>
     </header>
 
+    <div class="d-flex flex-column align-items-center" id="blocMesEmprunts">
 
-    <div class="d-flex flex-column align-items-center"
-         id="blocMesEmprunts">
-
-        <div class="p-2 border" id="MonCompteInfos">
-            <h2>Mes Emprunts</h2>
-
+        <div class="p-2 border" id="MonCompteBorrows">
             <div id="OneBorrowMonCompte" th:each="borrow,custStat:${borrows}">
                 <div>
                     <h3 th:text="${borrow.bookTitle}"></h3>
@@ -51,15 +46,9 @@
                             <input type="hidden" name="borrowId" id="borrowId" th:value="${borrow.id}">
                             <button type="submit" name="submit" value="value" class="btn btn-warning">Prolonger le livre</button>
                         </form>
-                      <!--  <a class="btn btn-warning" th:action="@{user/account/borrows/(id=${borrow.id})}" th:method="post">Prolonger le livre</a>-->
-                        <!--<a class="btn btn-warning" th:action="@{user/account/borrows/(id=${borrow.id})}">Prolonger le livre</a>-->
                     </div>
-
                 </div>
-
-
             </div>
-
         </div>
     </div>
 

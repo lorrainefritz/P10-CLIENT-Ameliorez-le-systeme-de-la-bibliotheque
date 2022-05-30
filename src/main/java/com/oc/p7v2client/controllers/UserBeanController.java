@@ -42,15 +42,22 @@ public class UserBeanController {
     @PostMapping(value = "/login")
     public String authenticate(@CookieValue(name = "jwtToken", required = false) Cookie cookie, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpServletResponse response) {
         log.info("HTTP POST request received at /login with authenticate");
-        String token = userProxy.authenticate(username, password);
-        log.info("HTTP POST request received at /login with authenticate with token {}", token);
-        cookie = cookieUtil.createCookie(token);
-        response.addCookie(cookie);
+        try {
+            String token = userProxy.authenticate(username, password);
+            cookie = cookieUtil.createCookie(token);
+            response.addCookie(cookie);
+            log.info("HTTP POST request received at /login with authenticate with token {}", token);
+        } catch (Exception e) {
+            log.info("HTTP POST request received at /login with exception {}", e);
+            return "redirect:/login";
+        }
+
         log.info("HTTP POST request received at /login with authenticate with cookie {}, with expiration date {}", cookie.getName(), new Date(System.currentTimeMillis() + 12 * 24 * 60 * 60 * 1000));
         return "redirect:/users/account";
     }
-    @GetMapping(value ="/logout")
-    public String logout(HttpServletResponse response){
+
+    @GetMapping(value = "/logout")
+    public String logout(HttpServletResponse response) {
         log.info("HTTP GET request received at /logout ");
         cookieUtil.deleteCookie(response);
         return "redirect:/login";
@@ -58,7 +65,7 @@ public class UserBeanController {
 
     @GetMapping(value = "/users/account")
     /*public String getUserAccount(Model model, @CookieValue(name = "jwtToken", defaultValue = testToken) String cookie) {*/
-    public String getUserAccount(Model model, @CookieValue(name = "jwtToken") String cookie) {
+    public String getUserAccount(Model model, @CookieValue(name = "jwtToken",required = false) String cookie) {
         log.info("HTTP GET request received at /users/account");
         if (cookie == null) {
             log.info("HTTP GET request received at /users/account with cookie is null");

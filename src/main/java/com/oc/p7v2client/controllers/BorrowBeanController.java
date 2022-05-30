@@ -24,10 +24,12 @@ public class BorrowBeanController {
     private final BorrowProxy borrowProxy;
 
     @GetMapping(value="/users/account/borrows")
-    public String listOfBorrows(Model model,@CookieValue(name = "jwtToken") String cookie){
+    public String listOfBorrows(Model model,@CookieValue(name = "jwtToken",required = false) String cookie){
         log.info("HTTP GET request received at /users/account/borrows with listOfBorrows");
         if (cookie == null) {
             log.info("HTTP GET request received at /users/account/borrows with cookie is null");
+            model.addAttribute("username", new String());
+            model.addAttribute("password", new String());
             return "authenticationForm";
         } else {
 

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Les Bibliothèques de Katzenheim</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="bloc_page">
+<div id="bloc_page">
     <header>
         <div class="header_top_part">
             <div th:insert="menu.html"></div>
@@ -16,40 +16,30 @@
         </div>
     </header>
 
-
-    <div class="d-flex flex-column align-items-center"
-         id="blocPageMonCompte">
-
-        <div class="p-2 border" id="MonCompteInfos">
-            <h2>Mes informations générales</h2>
-            <div>
-                PRENOM : <a th:text="${user.firstName}"></a>
+    <div class="d-flex flex-column align-items-center" id="blocPageMonCompte">
+            <div class="p-2 border" id="MonCompteInfos">
+                <h2>Mes informations générales</h2>
+                <div>
+                    PRENOM : <a th:text="${user.firstName}"></a>
+                </div>
+                <div>
+                    NOM : <a th:text="${user.lastName}"></a>
+                </div>
+                <div>
+                    ADRESSE : <a th:text="${user.address}"></a>
+                </div>
+                <div>
+                    TELEPHONE : <a th:text="${user.phone}"></a>
+                </div>
+                <div>
+                    EMAIL : <a th:text="${user.username}"></a>
+                </div>
             </div>
-            <div>
-                NOM : <a th:text="${user.lastName}"></a>
-            </div>
-            <div>
-                ADRESSE : <a th:text="${user.address}"></a>
-            </div>
-            <div>
-                TELEPHONE : <a th:text="${user.phone}"></a>
-            </div>
-            <div>
-                EMAIL : <a th:text="${user.email}"></a>
-            </div>
-
-            <div>
-                USERNAME : <a th:text="${user.username}"></a>
-            </div>
-
         </div>
-
     </div>
-</div>
-
-<footer>
-    <div th:insert="footer.html"></div>
-</footer>
+    <footer>
+        <div th:insert="footer.html"></div>
+    </footer>
 </div>
 </body>
 </html>
