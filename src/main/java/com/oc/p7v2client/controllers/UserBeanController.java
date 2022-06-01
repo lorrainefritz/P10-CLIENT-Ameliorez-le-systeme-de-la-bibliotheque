@@ -2,16 +2,16 @@ package com.oc.p7v2client.controllers;
 
 import com.oc.p7v2client.beans.UserBean;
 import com.oc.p7v2client.cookie.CookieUtil;
+import com.oc.p7v2client.dto.UserLoginDto;
 import com.oc.p7v2client.proxies.UserProxy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +24,8 @@ public class UserBeanController {
     private final UserProxy userProxy;
     private final CookieUtil cookieUtil;
 
-    //penser à rajouter l'identification token...
+
+
     @GetMapping(value = "/login")
     public String authenticationForm(Model model, @CookieValue(name = "jwtToken", required = false) Cookie cookie) {
         if (cookie != null) {
@@ -33,17 +34,21 @@ public class UserBeanController {
             return "redirect:/users/account";
         } else {
             log.info("HTTP GET request received at /login with authenticationForm");
-            model.addAttribute("username", new String());
-            model.addAttribute("password", new String());
+            UserLoginDto userLoginDto = new UserLoginDto();
+            model.addAttribute("userLoginDto", userLoginDto);
         }
         return "authenticationForm";
     }
 
     @PostMapping(value = "/login")
-    public String authenticate(@CookieValue(name = "jwtToken", required = false) Cookie cookie, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpServletResponse response) {
+    public String authenticate(@CookieValue(name = "jwtToken", required = false) Cookie cookie, @Validated @ModelAttribute("userLoginDto")UserLoginDto userLoginDto, BindingResult bindingResult, HttpServletResponse response) {
         log.info("HTTP POST request received at /login with authenticate");
+        if (bindingResult.hasErrors()) {
+            log.info("HTTP POST request received at /login with authenticate in binding has errors");
+            return "authenticationForm";
+        }
         try {
-            String token = userProxy.authenticate(username, password);
+            String token = userProxy.authenticate(userLoginDto.getUsername(), userLoginDto.getPassword());
             cookie = cookieUtil.createCookie(token);
             response.addCookie(cookie);
             log.info("HTTP POST request received at /login with authenticate with token {}", token);
@@ -64,7 +69,6 @@ public class UserBeanController {
     }
 
     @GetMapping(value = "/users/account")
-    /*public String getUserAccount(Model model, @CookieValue(name = "jwtToken", defaultValue = testToken) String cookie) {*/
     public String getUserAccount(Model model, @CookieValue(name = "jwtToken",required = false) String cookie) {
         log.info("HTTP GET request received at /users/account");
         if (cookie == null) {

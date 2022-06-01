@@ -33,10 +33,6 @@ public class UserBean {
          private String lastName;
 
 
-         @Size(max = 65, message = "65 charactères maximum")
-         @NotBlank(message = "Ce champ ne doit pas être vide")
-         private String email;
-
 
          @Size(max = 65, message = "65 charactères maximum")
          @NotBlank(message = "Ce champ ne doit pas être vide")

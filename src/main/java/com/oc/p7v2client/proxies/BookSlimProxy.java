@@ -15,6 +15,5 @@ public interface BookSlimProxy {
     public List<BookSlimBean> bookSlimBeanList();
    @GetMapping(value="/books/search")
    public List<BookSlimBean> booksSlimsListWithAKeyword(@RequestParam(value="keyword") String keyword);
-    /* @GetMapping(value="/books/{keyword}")
-    public List<BookSlimBean> booksSlimsListWithAKeyword(@PathVariable String keyword);*/
+
 }

@@ -46,26 +46,5 @@ public class BookSlimController {
     }
 
 
-    /*@GetMapping(value="/books/{keyword}")
-    public String listOfBooksSlims(Model model, @PathVariable String keyword){
-        log.info("HTTP GET request received at /books with listOfBooksSlims");
-       *//* if (keyword == null) {
-            List<BookSlimBean> booksSlims = bookSlimProxy.bookSlimBeanList();
-            model.addAttribute("booksSlims", booksSlims);
-            model.addAttribute("keyword", new String());
-        }else{*//*
-        log.info("HTTP GET request received at /books with listOfBooksSlims WITH keyword : " +keyword );
-        List<BookSlimBean> booksSlims = bookSlimProxy.booksSlimsListWithAKeyword(keyword);
-        model.addAttribute("booksSlims", booksSlims);
-        model.addAttribute("keyword", new String());
-        return"booksList";
-    }*/
 
-
-  /*  @PostMapping(value="/books/{keyword}")
-    public String searchForABooksSlimsListWithAKeyword(@ModelAttribute String keyword){
-        log.info("HTTP POST request received at /books/"+keyword+ "with searchForBooksSlimsList");
-        bookSlimProxy.searchForABooksSlimsListWithAKeyword(keyword);
-        return"redirect:/booksList";
-    }*/
 }

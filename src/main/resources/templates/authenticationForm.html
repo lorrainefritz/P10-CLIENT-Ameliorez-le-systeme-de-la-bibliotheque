@@ -11,17 +11,11 @@
     </div>
 </header>
 <div class="page_formulaire">
-   <!-- <div class="row" id="enregistrementEtLogin">
-        <div class="col-sm-4 registerPart" id ="enregistrementBlock">
-            <div class="m-5">
-                <h1>S'INSCRIRE</h1>
-                <a href="/sInscrire">Nouveau? S'enregistrer</a>
-            </div>
-        </div>-->
+
         <div class="col-sm-8 loginPart" id ="loginBlock">
             <div class="m-5">
                 <h1>SE CONNECTER</h1>
-                <form th:action="@{/login}" method="post">
+                <form th:action="@{/login}" method="post" th:object="${userLoginDto}">
                     <div th:if="${param.error}">
                         <div class="alert alert-danger">Identifiant / mot de passe éronné(s).</div>
                     </div>
@@ -29,14 +23,23 @@
                         <div class="alert alert-info">Vous avez été déconnecté.</div>
                     </div>
                     <div class="col-sm-8 form-group">
-                        <label for="username">Identifiant</label>: <input type="text"
+                        <label for="username">Identifiant</label>: <input type="text" th:field="*{username}"
                                                                           id="username" name="username" class="form-control"
                                                                           autofocus="autofocus" placeholder="Username">
+                        <div class="element_danger">
+                            <div id="errorusername"></div>
+                            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                        </div>
                     </div>
+
                     <div class="col-sm-8 form-group">
-                        <label for="password">Mot de passe</label>: <input type="password"
+                        <label for="password">Mot de passe</label>: <input type="password" th:field="*{password}"
                                                                            id="password" name="password" class="form-control"
                                                                            placeholder="Password">
+                        <div class="element_danger">
+                            <div id="errorpassword"></div>
+                            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                        </div>
                     </div>
                     <div class="col-sm-8 form-group">
                         <input type="submit" name="login-submit" id="login-submit"

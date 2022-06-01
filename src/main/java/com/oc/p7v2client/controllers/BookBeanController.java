@@ -15,12 +15,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Log4j2
 public class BookBeanController {
     private final BookProxy bookProxy;
-/*    @GetMapping(value="/books/get/{id}")
-    public String bookDetails(@PathVariable Integer id, Model model){
-        log.info("HTTP GET request received at /books/get/"+id+ " with findAllBooks");
-        BookBean book = bookProxy.bookBean(id);
-        model.addAttribute("book", book);
-        return "bookDetails";
-    }*/
 
 }

@@ -7,6 +7,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name="P7-V2-API",url="localhost:8083")
 public interface BookProxy {
-   /* @GetMapping(value="books/get/{id}")
-    public BookBean bookBean(@PathVariable Integer id);*/
+
 }
