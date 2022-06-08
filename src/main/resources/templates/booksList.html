@@ -25,16 +25,7 @@
 
 
     <div class="row" id="blocPageBooksList" th:each="book:${booksSlims}">
-        <!--<div th:if="${book.cover == null}" class="col-sm-4">
-            <img class="img-fluid" alt="generic image of book"
-                 src="imagesAndLogos/images/GenericImageOfABook.png">
-        </div>
 
-        <div th:if="${book.cover != null}" class="col-sm-4">
-            <img class="img-fluid" alt="cover of the book"
-                 th:src="*{'data:image/png;base64,'+{book.cover}}">
-        </div>
--->
         <div class="col-sm-4">
             <img class="img-fluid" alt="generic image of book"
                  src="/images/GenericImageOfABook.png">
@@ -76,6 +67,9 @@
             </div>
             <div>
                 Nombre de copies disponibles : <a th:text="${book.numberOfCopiesAvailable}"></a>
+            </div>
+            <div th:if="${book.numberOfCopiesAvailable==0}>
+
             </div>
 
 

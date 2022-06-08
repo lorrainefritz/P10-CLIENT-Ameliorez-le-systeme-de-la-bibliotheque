@@ -9,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Getter
 @Setter
@@ -56,4 +57,5 @@ public class BookBean {
 
     private LibraryBean libraryBean;
     private StockBean stockBean;
+    private List<ReservationBean> reservationBeanList;
 }

@@ -7,10 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,11 +18,12 @@ public class BookSlimController {
     private final BookSlimProxy bookSlimProxy;
 
     @GetMapping(value = "/books")
-    public String listOfBooksSlims(Model model) {
+    public String listOfBooksSlims(Model model,@CookieValue(name = "jwtToken",required = false) String cookie) {
         log.info("HTTP GET request received at /books with listOfBooksSlims");
             List<BookSlimBean> booksSlims = bookSlimProxy.bookSlimBeanList();
             model.addAttribute("booksSlims", booksSlims);
             model.addAttribute("keyword", new String());
+
         return "booksList";
     }
 
