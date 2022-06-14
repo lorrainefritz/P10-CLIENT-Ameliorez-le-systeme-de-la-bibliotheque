@@ -41,6 +41,9 @@
                     <div>
                         bibliothèque : <a th:text="${borrow.libraryName}"></a>
                     </div>
+                    <div>
+                        Les horaires d'ouverture : <a th:text="${borrow.openingTime}"></a>
+                    </div>
                     <div th:if="${borrow.alreadyExtended == false}">
                         <form method="post" th:action="@{borrows/extend}">
                             <input type="hidden" name="borrowId" id="borrowId" th:value="${borrow.id}">

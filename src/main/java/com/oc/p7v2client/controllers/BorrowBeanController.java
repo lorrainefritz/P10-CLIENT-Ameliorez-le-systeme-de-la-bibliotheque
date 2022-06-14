@@ -42,7 +42,7 @@ public class BorrowBeanController {
 
     @PostMapping("/users/account/borrows/extend")
     public String extendABorrow(@RequestParam(value = "borrowId")Integer borrowId,@CookieValue(name = "jwtToken") String cookie){
-        log.info("HTTP GET request received at /users/account/borrows/extend with listOfBorrows");
+        log.info("HTTP POST request received at /users/account/borrows/extend with extendABorrow");
         if (cookie == null) {
             log.info("HTTP POST request received at /users/account/borrows/extend with cookie is null");
             return "authenticationForm";

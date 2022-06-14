@@ -57,5 +57,7 @@ public class BookBean {
 
     private LibraryBean libraryBean;
     private StockBean stockBean;
-    private List<ReservationBean> reservationBeanList;
+
+    private List<ReservationBean> reservationBean;
+    private List<BorrowBean> borrowBean;
 }

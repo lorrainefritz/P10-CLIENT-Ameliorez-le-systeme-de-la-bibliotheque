@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Les Bibliothèques de Katzenheim</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="bloc_page">
+    <header>
+        <div class="header_top_part">
+            <div th:insert="menu.html"></div>
+        </div>
+        <div class="header_bottom_part">
+            <h1>MES RESERVATIONS</h1>
+        </div>
+    </header>
+
+    <div class="d-flex flex-column align-items-center" id="blocMesReservations">
+
+        <div class="p-2 border" id="MonCompteReservations">
+            <div id="OneReservationMonCompte" th:each="reservation,custStat:${reservations}">
+                <div>
+                    <h3 th:text="${reservation.bookTitle}"></h3>
+                    <div>
+                        Date d'emprunt : <a th:text="${#dates.format(reservation.startDate, 'dd-MMM-yyyy')}"></a>
+                    </div>
+                    <div>
+                        Date de retour : <a th:text="${#dates.format(reservation.endDate, 'dd-MMM-yyyy')}"></a>
+                    </div>
+                    <div>
+                        Position dans la liste d'attente <a th:text="${reservation.reservationPosition}"></a>
+                    </div>
+
+                    <div>
+                        La bibliothèque où venir retirer l'ouvrage : <a th:text="${reservation.libraryName}"></a>
+                    </div>
+                    <div>
+                        Les horaires d'ouverture : <a th:text="${reservation.openingTime}"></a>
+                    </div>
+                    <div>
+                        <form method="post" th:action="@{reservations/delete}">
+                            <input type="hidden" name="reservationId" id="reservationId" th:value="${reservation.id}">
+                            <button type="submit" name="submit" value="value" class="btn btn-warning">Supprimer une reservation</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div th:insert="footer.html"></div>
+    </footer>
+</div>
+</body>
+</html>

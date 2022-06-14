@@ -1,5 +1,7 @@
 package com.oc.p7v2client.controllers;
 
+import com.oc.p7v2client.beans.BorrowBean;
+import com.oc.p7v2client.beans.ReservationBean;
 import com.oc.p7v2client.beans.UserBean;
 import com.oc.p7v2client.cookie.CookieUtil;
 import com.oc.p7v2client.dto.UserLoginDto;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.List;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Controller
@@ -82,5 +85,32 @@ public class UserBeanController {
         return "myAccount";
     }
 
+    @GetMapping(value = "/users/account/reservations")
+    public String getUserReservations (Model model, @CookieValue(name = "jwtToken",required = false) String cookie){
+        log.info("HTTP GET request received at /users/account/reservations");
+        if (cookie == null) {
+            log.info("HTTP GET request received at /users/account/reservations with cookie is null");
+            return "authenticationForm";
+        }else{
+            log.info("HTTP GET request received at /users/account/reservations with cookie is " + cookie);
+            List<ReservationBean> reservations = userProxy.reservationList(cookie);
+            model.addAttribute("reservations", reservations);
+            model.addAttribute("reservationId", new String());
+        }
+        return "reservationsList";
+    }
+
+    @PostMapping("/users/account/reservations/delete")
+    public String extendAReservation(@RequestParam Integer reservationId,@CookieValue(name = "jwtToken") String cookie){
+        log.info("HTTP POST request received at /users/account/reservations/delete with deleteReservation");
+        if (cookie == null) {
+            log.info("HTTP POST request received at /users/account/reservations/delete with cookie is null");
+            return "authenticationForm";
+        } else{
+            log.info("HTTP POST request received at /users/account/reservations/delete with cookie is {} and borrowId is {}", cookie,reservationId);
+            userProxy.deleteAReservation(reservationId);
+        }
+        return "redirect:/users/account/reservations";
+    }
 
 }

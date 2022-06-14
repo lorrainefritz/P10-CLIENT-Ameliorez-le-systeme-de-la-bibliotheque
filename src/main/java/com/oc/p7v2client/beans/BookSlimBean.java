@@ -6,7 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.*;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,5 +42,11 @@ public class BookSlimBean {
     private int numberOfCopiesAvailable;
     @NotBlank(message="Ce champ ne doit pas être vide")
     private String libraryName;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date nearestReturnDate;
+    @NotNull(message="Ce champ ne doit pas être vide")
+    private int numberOfReservation;
+    @NotNull(message="Ce champ ne doit pas être vide")
+    private int maxReservationListSize;
 
 }

@@ -23,7 +23,6 @@
     </form>
 
 
-
     <div class="row" id="blocPageBooksList" th:each="book:${booksSlims}">
 
         <div class="col-sm-4">
@@ -68,11 +67,23 @@
             <div>
                 Nombre de copies disponibles : <a th:text="${book.numberOfCopiesAvailable}"></a>
             </div>
-            <div th:if="${book.numberOfCopiesAvailable==0}>
+            <div th:if="${book.numberOfCopiesAvailable==0}">
+                <div>Nombre de réservations pour ce livre : <a th:text="${book.numberOfReservation}"></a></div>
+                <div>Date de retour pour ce livre : <a
+                        th:text="${#dates.format(book.nearestReturnDate, 'dd-MMM-yyyy')}"></a></div>
+                <div th:if="${user.username!=null}">
+                    <div th:if="${book.numberOfReservation<book.maxReservationListSize}">
+                        <form method="post" th:action="@{books/reservation}">
+                            <input type="hidden" name="bookId" id="bookId" th:value="${book.id}">
+                            <input type="hidden" name="userId" id="userId" th:value="${user.id}">
+                            <input type="hidden" name="bookTitle" id="bookTitle" th:value="${book.title}">
+                            <button type="submit" name="submit" value="value" class="btn btn-warning">Réserver le livre
+                            </button>
+                        </form>
+                    </div>
 
+                </div>
             </div>
-
-
 
         </div>
     </div>
