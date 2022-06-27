@@ -45,10 +45,14 @@
                         Les horaires d'ouverture : <a th:text="${borrow.openingTime}"></a>
                     </div>
                     <div th:if="${borrow.alreadyExtended == false}">
-                        <form method="post" th:action="@{borrows/extend}">
-                            <input type="hidden" name="borrowId" id="borrowId" th:value="${borrow.id}">
-                            <button type="submit" name="submit" value="value" class="btn btn-warning">Prolonger le livre</button>
-                        </form>
+                        <div th:if="${borrow.outdated == false}">
+                            <form method="post" th:action="@{borrows/extend}">
+                                <input type="hidden" name="borrowId" id="borrowId" th:value="${borrow.id}">
+                                <button type="submit" name="submit" value="value" class="btn btn-warning">Prolonger le
+                                    livre
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

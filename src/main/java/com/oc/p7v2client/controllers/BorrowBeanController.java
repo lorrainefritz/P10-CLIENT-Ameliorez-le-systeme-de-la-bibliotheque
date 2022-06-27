@@ -23,8 +23,8 @@ public class BorrowBeanController {
     private final UserProxy userProxy;
     private final BorrowProxy borrowProxy;
 
-    @GetMapping(value="/users/account/borrows")
-    public String listOfBorrows(Model model,@CookieValue(name = "jwtToken",required = false) String cookie){
+    @GetMapping(value = "/users/account/borrows")
+    public String listOfBorrows(Model model, @CookieValue(name = "jwtToken", required = false) String cookie) {
         log.info("HTTP GET request received at /users/account/borrows with listOfBorrows");
         if (cookie == null) {
             log.info("HTTP GET request received at /users/account/borrows with cookie is null");
@@ -32,23 +32,27 @@ public class BorrowBeanController {
             model.addAttribute("password", new String());
             return "authenticationForm";
         } else {
-
             List<BorrowBean> borrows = borrowProxy.borrowList(cookie);
             model.addAttribute("borrows", borrows);
             model.addAttribute("borrowId", new String());
         }
-       return "borrowsList";
+        return "borrowsList";
     }
 
     @PostMapping("/users/account/borrows/extend")
-    public String extendABorrow(@RequestParam(value = "borrowId")Integer borrowId,@CookieValue(name = "jwtToken") String cookie){
+    public String extendABorrow(@RequestParam(value = "borrowId") Integer borrowId, @CookieValue(name = "jwtToken") String cookie) {
         log.info("HTTP POST request received at /users/account/borrows/extend with extendABorrow");
         if (cookie == null) {
             log.info("HTTP POST request received at /users/account/borrows/extend with cookie is null");
             return "authenticationForm";
-        } else{
-            log.info("HTTP POST request received at /users/account/borrows/extend with cookie is {} and borrowId is {}", cookie,borrowId);
-            borrowProxy.extendABorrow(borrowId);
+        } else {
+            log.info("HTTP POST request received at /users/account/borrows/extend with cookie is {} and borrowId is {}", cookie, borrowId);
+            BorrowBean borrowBean = borrowProxy.getABorrowById(borrowId);
+            if (borrowBean.isOutdated() == true) {
+                log.info("HTTP POST request received at /users/account/borrows/extend where the borrow isOutdated");
+            } else {
+                borrowProxy.extendABorrow(borrowId);
+            }
         }
         return "redirect:/users/account/borrows";
     }

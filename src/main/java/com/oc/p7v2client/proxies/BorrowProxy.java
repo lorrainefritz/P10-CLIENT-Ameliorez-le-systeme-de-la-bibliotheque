@@ -16,5 +16,6 @@ public interface BorrowProxy {
     @PostMapping(value="/users/account/borrows/extend")
     public BorrowBean extendABorrow(@RequestParam Integer borrowId);
 
-
+    @GetMapping(value = "/borrowById/")
+    BorrowBean getABorrowById(@RequestParam Integer borrowId);
 }
