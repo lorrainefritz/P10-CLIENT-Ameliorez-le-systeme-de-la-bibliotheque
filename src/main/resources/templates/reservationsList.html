@@ -15,10 +15,10 @@
         </div>
     </header>
 
-    <div class="d-flex flex-column align-items-center" id="blocMesReservations">
+    <div class="d-flex flex-column align-items-center" id="blocPageBooksList">
 
-        <div class="p-2 border" id="MonCompteReservations">
-            <div id="OneReservationMonCompte" th:each="reservation,custStat:${reservations}">
+        <div class="p-2 border" id="MonCompteBorrows">
+            <div id="OneBorrowMonCompte" th:each="reservation,custStat:${reservations}">
                 <div>
                     <h3 th:text="${reservation.bookTitle}"></h3>
                     <div>

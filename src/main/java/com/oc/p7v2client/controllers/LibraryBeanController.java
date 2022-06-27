@@ -1,8 +1,6 @@
 package com.oc.p7v2client.controllers;
 
-import com.oc.p7v2client.beans.BookSlimBean;
 import com.oc.p7v2client.beans.LibraryBean;
-import com.oc.p7v2client.proxies.BookSlimProxy;
 import com.oc.p7v2client.proxies.LibraryProxy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

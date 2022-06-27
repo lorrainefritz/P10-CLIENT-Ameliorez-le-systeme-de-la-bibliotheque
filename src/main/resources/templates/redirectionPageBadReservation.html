@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Les Bibliothèques de Katzenheim</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="bloc_page">
+    <header>
+        <div class="header_top_part">
+            <div th:insert="menu.html"></div>
+        </div>
+        <div class="header_bottom_part">
+            <h1>VOUS AVEZ DEJA UN EMPRUNT EN COURS POUR CE LIVRE!</h1>
+        </div>
+    </header>
+    <div class="row" id="blocPageBooksList">
+        <div class="col-sm-4">
+            <img class="img-fluid" width="500" height="400" alt="image"
+                 src="/images/catBook.jpg">
+        </div>
+        <div class="col-sm-4">Nous sommes désolés, vous ne pouvez pas reserver un livre que vous avez déjà emprunté. Merci de votre compréhension! </div>
+    </div>
+
+    <footer>
+        <div th:insert="footer.html"></div>
+    </footer>
+</div>
+</body>
+</html>

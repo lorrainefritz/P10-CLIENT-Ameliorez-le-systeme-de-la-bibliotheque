@@ -69,7 +69,7 @@
             </div>
             <div th:if="${book.numberOfCopiesAvailable==0}">
                 <div>Nombre de réservations pour ce livre : <a th:text="${book.numberOfReservation}"></a></div>
-                <div>Date de retour pour ce livre : <a
+                <div th:if="${book.nearestReturnDate!=null}">Date de retour pour ce livre : <a
                         th:text="${#dates.format(book.nearestReturnDate, 'dd-MMM-yyyy')}"></a></div>
                 <div th:if="${user.username!=null}">
                     <div th:if="${book.numberOfReservation<book.maxReservationListSize}">
