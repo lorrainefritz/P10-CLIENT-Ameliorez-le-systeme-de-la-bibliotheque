@@ -5,10 +5,7 @@ import com.oc.p7v2client.beans.ReservationBean;
 import com.oc.p7v2client.beans.UserBean;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,6 @@ public interface UserProxy {
     @GetMapping(value = "/users/account/reservations")
     List<ReservationBean> reservationList(@CookieValue(value ="jwtToken")String token);
 
-    @PostMapping("/users/account/reservations/delete")
+    @DeleteMapping("/users/account/reservations/delete")
     public ResponseEntity deleteAReservation(@RequestParam Integer reservationId);
 }

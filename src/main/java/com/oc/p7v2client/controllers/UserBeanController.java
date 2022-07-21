@@ -100,7 +100,7 @@ public class UserBeanController {
         return "reservationsList";
     }
 
-    @PostMapping("/users/account/reservations/delete")
+    @DeleteMapping("/users/account/reservations/delete")
     public String extendAReservation(@RequestParam Integer reservationId,@CookieValue(name = "jwtToken") String cookie){
         log.info("HTTP POST request received at /users/account/reservations/delete with deleteReservation");
         if (cookie == null) {

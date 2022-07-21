@@ -24,8 +24,8 @@
                     <div>
                         Date d'emprunt : <a th:text="${#dates.format(reservation.startDate, 'dd-MMM-yyyy')}"></a>
                     </div>
-                    <div>
-                        Date de retour : <a th:text="${#dates.format(reservation.endDate, 'dd-MMM-yyyy')}"></a>
+                    <div th:if="${reservation.endDate != null}" >
+                        Date de limite de retrait : <a th:text="${#dates.format(reservation.endDate, 'dd-MMM-yyyy')}"></a>
                     </div>
                     <div>
                         Position dans la liste d'attente <a th:text="${reservation.reservationPosition}"></a>
@@ -38,7 +38,7 @@
                         Les horaires d'ouverture : <a th:text="${reservation.openingTime}"></a>
                     </div>
                     <div>
-                        <form method="post" th:action="@{reservations/delete}">
+                        <form th:method="delete" th:action="@{reservations/delete}">
                             <input type="hidden" name="reservationId" id="reservationId" th:value="${reservation.id}">
                             <button type="submit" name="submit" value="value" class="btn btn-warning">Supprimer une reservation</button>
                         </form>
