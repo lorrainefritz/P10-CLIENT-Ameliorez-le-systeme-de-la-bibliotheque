@@ -22,7 +22,7 @@
                 <div>
                     <h3 th:text="${reservation.bookTitle}"></h3>
                     <div>
-                        Date d'emprunt : <a th:text="${#dates.format(reservation.startDate, 'dd-MMM-yyyy')}"></a>
+                        Date de réservation : <a th:text="${#dates.format(reservation.startDate, 'dd-MMM-yyyy')}"></a>
                     </div>
                     <div th:if="${reservation.endDate != null}" >
                         Date de limite de retrait : <a th:text="${#dates.format(reservation.endDate, 'dd-MMM-yyyy')}"></a>

@@ -10,7 +10,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!--<script type="text/javascript" th:src="@{/myScript.js}"></script>-->
+
 
 </head>
 <body>
@@ -32,9 +32,7 @@
 					data-toggle="dropdown">Les Bibliothèques</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="/libraries">La liste
-						des bibliothèques</a> <!--<a class="dropdown-item"
-						sec:authorize="hasRole('ADMIN')" href="/ajouterUneBibliotheque">Ajouter
-						une bibliothèque</a>-->
+						des bibliothèques</a>
 				</div>
 			</li>
 
@@ -43,14 +41,13 @@
 					data-toggle="dropdown">Les livres</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="/books">La liste des
-						livres</a> <!--<a class="dropdown-item" sec:authorize="hasRole('ADMIN')"
-						href="/ajouterDesLivres">Ajouter des Livres</a>-->
+						livres</a>
 
 				</div>
 			</li>
 
 
-			<!--sec:authorize="isAuthenticated()"-->
+
 			<li class="dropdown" >
 				<button type="button" class="btn btn-primary dropdown-toggle"
 						data-toggle="dropdown">Mon Compte</button>
@@ -67,28 +64,6 @@
 	</nav>
 
 
-			<!--
-
-
-
-			<li class="dropdown" sec:authorize="hasRole('ADMIN')">
-				<button type="button" class="btn btn-primary dropdown-toggle"
-					data-toggle="dropdown">Fonctionnalités ADMIN</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="/userListForAdmin">Liste des
-						Utilisateurs</a>
-				</div>
-			</li>
-
-
-		</ul>
-		<a class="navbar-brand" href="#" sec:authorize="isAnonymous()"> <img
-			class="img-fluid" alt="Mon Compte"
-			src="/logos/monCompte.png">
-		</a> <a class="navbar-brand" href="#" sec:authorize="isAuthenticated()">
-			<img class="img-fluid" alt="logo isAuth"
-			src="/logos/isAuth.png">
-		</a>-->
 
 	</nav>
 

@@ -65,6 +65,9 @@
                 Se livre se trouve à la bibliothèque de : <a th:text="${book.libraryName}"></a>
             </div>
             <div>
+                Nombre d'exemplaires totaux pour ce livre : <a th:text="${book.totalOfCopies}"></a>
+            </div>
+            <div>
                 Nombre de copies disponibles : <a th:text="${book.numberOfCopiesAvailable}"></a>
             </div>
             <div th:if="${book.numberOfCopiesAvailable==0}">

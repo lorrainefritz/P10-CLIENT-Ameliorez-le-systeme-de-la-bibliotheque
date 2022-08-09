@@ -40,6 +40,10 @@ public class BookBean {
     @Max(value=10, message="doit ête compris entre 1 et 10")
     @NotNull(message="Ce champ ne doit pas être vide")
     private int numberOfCopiesAvailable;
+    @Min(value=0, message="doit ête compris entre 1 et 10")
+    @Max(value=10, message="doit ête compris entre 1 et 10")
+    @NotNull(message="Ce champ ne doit pas être vide")
+    private int totalOfCopies;
     @NotBlank(message="Ce champ ne doit pas être vide")
     private String libraryName;
     @Temporal(TemporalType.TIMESTAMP)
